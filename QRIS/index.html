@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QRIS - FR3 PEDIA</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f0f0f;
+      color: #00ffff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    .qr-container {
+      margin: 10px auto;
+      max-width: 220px;
+      cursor: pointer;
+    }
+    .qr-container img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ffff;
+      transition: transform 0.3s ease;
+    }
+    .qr-container:hover img {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      position: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+    .modal.show {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      box-shadow: 0 0 25px #00ffff;
+      border-radius: 12px;
+    }
+
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f0f0f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 6px solid #00ffff;
+      border-top: 6px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      font-size: 18px;
+      background-color: #333;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #0ff;
+      transition: background-color 0.3s ease;
+    }
+    .back-button:hover {
+      background-color: #555;
+    }
+
+    .how-to {
+      margin-top: 50px;
+      padding: 20px;
+      background: #1f1f1f;
+      border-radius: 12px;
+      color: #00ffff;
+      box-shadow: 0 0 10px #00ffff;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .how-to h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #00ffff;
+      text-shadow: 0 0 5px #00ffff;
+    }
+    .how-to ol {
+      padding-left: 20px;
+    }
+    .how-to li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading -->
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+  </div>
+
+  <a href="/" class="back-button">Back</a>
+
+<div class=how-to>
+  <h1></h1>
+
+  <div class="qr-container" onclick="openModal()">
+    <img src="https://img1.pixhost.to/images/6036/604306129_fr3hosting.jpg" alt="QRIS" id="qrImage">
+    <h2>QRIS ALL PAYMENT</h2>
+    </div>
+  </div>
+
+  <div class="modal" id="modal" onclick="closeModal()">
+    <img src="https://img1.pixhost.to/images/6001/603806775_fr3hosting.jpg" alt="Zoomed QRIS">
+</div>
+
+  <div class="how-to">
+    <h2>Cara Menggunakan QRIS</h2>
+    <ol>
+      <li>Buka aplikasi pembayaran yang mendukung QRIS (DANA, OVO, GoPay, ShopeePay, dll).</li>
+      <li>Pilih fitur "Scan" atau "Pindai QR".</li>
+      <li>Arahkan kamera ke gambar QR di atas.</li>
+      <li>Periksa detail pembayaran yang muncul.</li>
+      <li>Masukkan nominal (jika diminta), lalu konfirmasi pembayaran.</li>
+    </ol>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+
+    function openModal() {
+      modal.classList.add('show');
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
